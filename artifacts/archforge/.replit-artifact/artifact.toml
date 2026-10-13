@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "ArchForge"
+description = "A browser-based software architecture workbench for visually designing systems, checking dependencies and security boundaries, and generating build plans and coding-agent prompts. Projects are stored locally in the browser."
+version = "1.0.0"
+id = "artifacts/archforge"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26174
+
+[services.development]
+run = "pnpm --filter @workspace/archforge run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/archforge", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/archforge/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26174"
+BASE_PATH = "/"

@@ -1,0 +1,1331 @@
+# PROJECT: ArchForge — Visual System Architecture Builder for Vibe Coding
+
+## 1. Your role
+
+Act as a principal software architect, senior systems engineer, expert visual editor developer, interaction designer, and senior vanilla JavaScript engineer.
+
+Build a complete, attractive, highly interactive website called **ArchForge**.
+
+The purpose of this application is to help a junior software developer design complete business systems without already having the knowledge of a senior software architect.
+
+The user must be able to visually design systems containing:
+
+- Web applications.
+- Mobile applications.
+- Desktop applications.
+- Frontend applications.
+- Backend services.
+- API endpoints.
+- Databases.
+- Reusable core packages.
+- Service inheritance and composition.
+- AI services.
+- Workflow automation.
+- Message queues.
+- External providers.
+- Cloud infrastructure.
+- Local servers.
+- Multiple isolated or connected networks.
+- Requests, responses, events, and data synchronization.
+
+The application must transform the visual architecture into a structured specification, dependency-aware implementation plan, and a collection of prompts for AI coding agents.
+
+This is an architecture editor, not a generic diagram editor.
+
+## 2. Mandatory delivery requirements
+
+Deliver the complete application as one file:
+
+index.html
+
+Use only:
+- HTML5.
+- CSS3.
+- Vanilla JavaScript.
+- SVG for the architecture canvas, nodes, connectors, and arrow routing.
+
+No React, Vue, Angular, TypeScript compilation, npm, or build process.
+
+The application must run by opening index.html in a modern browser.
+
+Use localStorage or IndexedDB for local project persistence. Prefer localStorage for the initial implementation if the project size remains reasonable.
+
+CDN libraries are optional, but the core editor must remain functional without external libraries. Do not use a diagramming library that prevents implementing the custom interaction and routing behavior described below.
+
+Do not require a backend or AI API key for core functionality.
+
+Do not fake live AI capabilities. Build a rule-based architect engine and an extensible interface for a future real AI provider.
+
+Deliver actual working source code, not a mockup, pseudocode, or partial implementation.
+
+## 3. Design philosophy
+
+ArchForge should feel like a professional visual development tool combining:
+
+- Figma-like direct manipulation.
+- draw.io-style connectors.
+- Mind-map-style exploration.
+- A network topology editor.
+- A service dependency designer.
+- A software architecture workbench.
+- A coding-agent prompt studio.
+
+The central canvas is the primary workspace and should occupy most of the screen.
+
+Avoid the appearance of a standard SaaS dashboard with a small diagram in the middle.
+
+### Visual style
+
+Use a premium dark interface by default.
+
+Suggested palette:
+- Background: #101114.
+- Canvas: #15171B.
+- Panels: #1B1E24.
+- Borders: #30343D.
+- Primary accent: #A78BFA.
+- Secondary accent: #67D5E8.
+- Text: #F2F3F7.
+- Muted text: #989EAB.
+- Success: #5CCB91.
+- Warning: #F3BD65.
+- Error: #F07178.
+
+Use a consistent icon system with inline SVG.
+
+Implement:
+- Light and dark themes.
+- Subtle shadows.
+- Fine grid lines.
+- Rounded component blocks.
+- Clear typography.
+- Smooth transitions.
+- Visible selection states.
+- Professional connection labels.
+- Restrained accent colors.
+
+The diagram must remain readable when many components are present.
+
+## 4. Main application layout
+
+Create a full-screen editor with four primary regions.
+
+### A. Top toolbar
+
+Include:
+- ArchForge logo.
+- Current project name.
+- Save indicator.
+- Undo.
+- Redo.
+- Select tool.
+- Hand/pan tool.
+- Connect tool.
+- Add component.
+- Auto-layout.
+- Fit canvas.
+- Zoom in/out.
+- Validate architecture.
+- Generate roadmap.
+- Export.
+- Theme toggle.
+
+Show useful keyboard shortcuts in tooltips.
+
+### B. Left component drawer
+
+Create a collapsible, searchable component library.
+
+This is a real component drawer, not a static navigation sidebar.
+
+Users can:
+- Search components.
+- Browse component categories.
+- Expand and collapse categories.
+- Drag components onto the canvas.
+- Tap a component to add it.
+- Use keyboard navigation.
+- Create custom component templates.
+- Save frequently used blocks.
+- Collapse the drawer to maximize canvas space.
+
+Component categories:
+
+1. Applications.
+2. Frontend.
+3. Mobile.
+4. Desktop.
+5. Backend Services.
+6. API Endpoints.
+7. Core Packages.
+8. Databases.
+9. AI Services.
+10. Automation.
+11. Messaging.
+12. External Integrations.
+13. Infrastructure.
+14. Network Boundaries.
+15. Security.
+16. Custom Components.
+
+Include recognizable visual identities for each category.
+
+### C. Central infinite canvas
+
+The canvas is the main application.
+
+Use SVG as the authoritative visual layer.
+
+Support:
+- Pan.
+- Zoom.
+- Drag and drop.
+- Multi-selection.
+- Group selection.
+- Marquee selection.
+- Connection creation.
+- Node resizing where appropriate.
+- Duplicate.
+- Delete.
+- Copy and paste.
+- Undo and redo.
+- Context menus.
+- Snap to grid.
+- Alignment guides.
+- Auto-layout.
+- Fit to content.
+- Zoom to selection.
+- Mini-map.
+- Search and focus on nodes.
+
+Use a world coordinate system independent of the screen size.
+
+Store node positions in world coordinates. Convert screen coordinates to world coordinates correctly during dragging, zooming, and panning.
+
+Avoid rebuilding the entire SVG during every pointer movement. Update only the affected elements.
+
+### D. Contextual inspector drawer
+
+When a node or connection is selected, show a contextual editor.
+
+The drawer must be easy to use with a mouse, keyboard, and touch.
+
+On desktop:
+- Right-side sliding panel.
+- Resizable width.
+- Collapsible sections.
+- Sticky header.
+- Save/apply controls where necessary.
+
+On mobile:
+- Bottom sheet or full-screen inspector.
+- Touch-friendly controls.
+- No tiny icon-only actions.
+- Safe scrolling.
+- A clear way to return to the canvas.
+- Preserve canvas position and zoom when opening and closing the drawer.
+
+Use tabs or collapsible sections instead of displaying every property simultaneously.
+
+Possible tabs:
+- Overview.
+- Configuration.
+- Interfaces.
+- Dependencies.
+- Security.
+- Implementation.
+- Documentation.
+
+## 5. Custom architecture blocks
+
+Every component must be represented by a typed data object.
+
+Each node must have:
+
+- Stable unique ID.
+- Node type.
+- Display name.
+- Description.
+- Category.
+- Icon.
+- Position.
+- Dimensions.
+- Parent group or network ID.
+- Technology stack.
+- Responsibility.
+- Input interfaces.
+- Output interfaces.
+- Dependencies.
+- Security configuration.
+- Implementation status.
+- Custom metadata.
+
+Create a registry that defines the default schema, icon, visual style, configuration fields, and behavior for each node type.
+
+Support user-created component templates that can be reused in other projects.
+
+### Important visual distinction
+
+Render each category differently enough to identify its purpose, but keep a consistent visual design.
+
+Examples:
+
+Frontend block:
+- Application icon.
+- Application name.
+- Framework.
+- API connections.
+
+Backend service block:
+- Service icon.
+- Service name.
+- Runtime.
+- Provided and required interfaces.
+
+Endpoint block:
+- HTTP method or transport.
+- Route or operation name.
+- Input and output contracts.
+
+Database block:
+- Database engine.
+- Schema or database name.
+- Data ownership.
+
+Core package block:
+- Package name.
+- Version.
+- Exposed contracts.
+- Parent package, if any.
+
+Network boundary:
+- Large labeled container surrounding relevant nodes.
+
+## 6. Correct wire and arrow routing engine
+
+THIS IS A CORE REQUIREMENT.
+
+The connectors must behave like carefully routed electrical wires in an apartment distribution board.
+
+Do not implement connections as arbitrary straight lines between node centers.
+
+Create a dedicated SVG-based connector engine.
+
+### A. Connector anchors
+
+Every node should have visible or discoverable connection anchors.
+
+Support:
+- Top.
+- Right.
+- Bottom.
+- Left.
+- Named interface ports.
+- Endpoint-specific ports.
+- Required-input ports.
+- Provided-output ports.
+
+For backend services, allow connections to individual endpoints rather than connecting only to the center of the service.
+
+When creating a connection, highlight compatible ports.
+
+Prevent a connector from terminating at the wrong endpoint.
+
+### B. Orthogonal wire routing
+
+Use Manhattan routing by default: horizontal and vertical segments with 90-degree bends.
+
+Wires must:
+- Start at the selected source port.
+- End at the selected target port.
+- Avoid passing through node rectangles.
+- Minimize unnecessary bends.
+- Minimize crossings.
+- Avoid overlapping labels.
+- Maintain readable spacing between parallel wires.
+- Recalculate when connected nodes move.
+- Remain connected during zooming and panning.
+- Use stable routing where possible instead of jumping unpredictably.
+
+Implement a routing algorithm using:
+- Source and target port positions.
+- Port exit directions.
+- Node obstacle rectangles.
+- Configurable routing clearance.
+- Bend penalties.
+- Crossing penalties where practical.
+- A fallback route when no preferred path is found.
+
+A grid-based A* router or a robust orthogonal waypoint router is acceptable.
+
+Use rounded corners sparingly so wires still look precise.
+
+If no valid route can be found, display a visible warning and use a fallback path that does not conceal the problem.
+
+### C. Parallel connections and crossings
+
+When multiple wires connect the same pair of nodes:
+- Assign different lanes.
+- Offset parallel wires.
+- Prevent overlapping labels.
+- Make each wire individually selectable.
+
+When wires cross:
+- Make crossings visually distinguishable.
+- Use line jumps or bridge arcs where practical.
+- Never imply that crossing wires are connected unless an explicit junction exists.
+
+Allow users to manually insert or move routing waypoints.
+
+Provide a "Reset route" action to restore automatic routing.
+
+### D. Directional communication
+
+Every connector must represent a real architectural relationship.
+
+Store:
+- Connection ID.
+- Source node ID.
+- Source port ID.
+- Target node ID.
+- Target port ID.
+- Connection type.
+- Protocol.
+- Label.
+- Direction.
+- Request contract.
+- Response contract.
+- Authentication.
+- Timeout.
+- Retry policy.
+- Error behavior.
+- Sync/async classification.
+
+The source and target are authoritative. Do not infer direction from the visual arrowhead alone.
+
+### E. Request and response visualization
+
+Support two display modes.
+
+**Mode 1: Separate request and response wires**
+
+Example:
+
+Frontend -- HTTP POST /orders --> Order API
+
+Frontend <-- HTTP 201 + OrderResponse -- Order API
+
+The request and response must use separate, individually labeled paths when both are explicitly modeled.
+
+**Mode 2: Combined bidirectional exchange**
+
+Render a request/response pair as one logical interaction with two directional arrows or a clearly marked bidirectional connection.
+
+Allow users to switch between these modes.
+
+A request and response must share a logical interaction ID when they belong to the same operation.
+
+Do not count a response as an unrelated API call.
+
+For synchronous request/response protocols, show:
+- Request method and path.
+- Request schema.
+- Response status codes.
+- Response schema.
+- Timeout.
+- Error response.
+
+For asynchronous communication, model events, acknowledgements, replies, and correlation identifiers separately when applicable.
+
+### F. Wire editing
+
+When selecting a wire, show:
+- Source.
+- Destination.
+- Source interface.
+- Target interface.
+- Protocol.
+- Request/response mode.
+- Direction.
+- Label.
+- Authentication.
+- Timeout.
+- Error behavior.
+- Routing style.
+- Manual waypoints.
+
+Allow changing the destination without deleting and recreating the entire connection.
+
+Support reconnecting wires by dragging their endpoints to another compatible port.
+
+Provide clear visual feedback for invalid connections.
+
+## 7. Service-to-endpoint architecture
+
+A backend service and its endpoints must be modeled separately.
+
+For example:
+
+Web Frontend
+    |
+    | HTTPS request
+    v
+Pharmacy API Service
+    |
+    +---- POST /api/sales
+    |
+    +---- GET /api/drugs/{id}
+    |
+    +---- POST /api/auth/login
+
+The endpoints are individually selectable nodes or first-class interface objects.
+
+Support both representations:
+- Endpoints displayed as child blocks inside a service.
+- Endpoints displayed as separate blocks connected to their parent service.
+
+Users can choose the preferred visualization.
+
+An endpoint must have:
+- Stable ID.
+- Parent service ID.
+- Operation ID.
+- HTTP method or protocol operation.
+- Path or operation name.
+- Description.
+- Request schema.
+- Response schemas.
+- Error responses.
+- Authentication requirements.
+- Authorization permissions.
+- Validation rules.
+- Rate limits.
+- Timeout.
+- Versioning.
+- Idempotency requirements where relevant.
+
+An endpoint must not accidentally become a standalone deployed service just because it is represented by its own node.
+
+The service owns the implementation and runtime; the endpoint defines an interface exposed by that service.
+
+Support connections such as:
+
+Frontend -> POST /api/sales
+POST /api/sales -> Sales Service
+Sales Service -> Inventory Service
+Inventory Service -> Inventory Database
+
+For clarity, either the endpoint connects to its owning service, or the parent-child relationship is displayed internally, depending on the chosen visualization mode.
+
+The underlying data model must preserve the distinction in both cases.
+
+Generate implementation prompts using the exact endpoint contracts.
+
+## 8. Networks and system boundaries
+
+Allow users to group components into distinct networks.
+
+Examples:
+- Public Internet.
+- Public Cloud.
+- Private Cloud Network.
+- Pharmacy Local Network.
+- Office LAN.
+- Mobile Device Network.
+- Database Subnet.
+- AI Provider Network.
+- External Payment Provider Network.
+- Development Environment.
+- Production Environment.
+
+Network groups must be large containers or boundaries on the canvas.
+
+Each boundary should have:
+- Stable ID.
+- Name.
+- Boundary type.
+- Description.
+- Security zone.
+- Network address information where relevant.
+- Allowed ingress.
+- Allowed egress.
+- Trust level.
+- Environment.
+- Parent network ID.
+- Firewall or gateway policies.
+
+Support nested groups where appropriate.
+
+### Group interactions
+
+Users can:
+- Create a network boundary.
+- Drag it around the canvas.
+- Resize it.
+- Move nodes into or out of it.
+- Collapse or expand it.
+- Lock its position.
+- Rename it.
+- Duplicate it.
+- Define allowed communication.
+- Select all components inside it.
+
+Moving a network boundary should move its contained components when the group is configured as a movable container.
+
+Keep the group model explicit. Do not accidentally change network membership when the user merely changes the zoom level.
+
+### Network crossing rules
+
+When a wire crosses network boundaries, make the crossing explicit.
+
+Highlight cross-network communication.
+
+Support:
+- Allowed.
+- Restricted.
+- Denied.
+- Requires gateway.
+- Requires VPN or private link.
+- Requires explicit approval.
+
+For example:
+
+Mobile Application
+    -> Internet
+    -> Cloud API Gateway
+    -> Private Backend Network
+    -> Database Subnet
+
+If a public application connects directly to a private database, produce an architecture warning unless the user explicitly defines an approved access path.
+
+Network validation should operate on actual graph connections and declared policies, not visual proximity alone.
+
+## 9. Reusable core packages and service inheritance
+
+This is another core requirement.
+
+Build a dedicated system for reusable packages, base services, interfaces, and inheritance.
+
+Distinguish three concepts clearly:
+
+1. **Package dependency:** a component uses a package.
+2. **Class or contract inheritance:** one type extends another type or implements an interface.
+3. **Service composition:** one runtime service calls or contains another component.
+
+Do not represent these relationships as interchangeable.
+
+### A. Core package nodes
+
+Examples:
+- Core.Domain.
+- Core.Contracts.
+- Core.Security.
+- Core.Messaging.
+- Core.Persistence.Abstractions.
+- Core.Observability.
+- Core.Tenancy.
+- Core.Licensing.
+- Core.Sync.
+- Core.AI.Abstractions.
+
+Each package must define:
+- Package ID.
+- Name.
+- Version.
+- Language.
+- Framework compatibility.
+- Repository.
+- Package manager.
+- Public contracts.
+- Dependencies.
+- Exported types.
+- Dependency restrictions.
+- Documentation.
+- Test requirements.
+
+Allow package version constraints and dependency compatibility validation.
+
+### B. Inheritance visualization
+
+Support specialized relationship arrows:
+
+- Extends.
+- Implements.
+- Depends on.
+- Uses.
+- Composes.
+- Publishes event to.
+- Subscribes to.
+- Calls.
+- Persists to.
+- Synchronizes with.
+
+Use distinct line patterns and labels.
+
+For example:
+
+Core.Contracts
+    ^
+    | implements
+Sales Service
+
+Or:
+
+Core.Domain
+    ^
+    | package dependency
+Sales Service
+
+Or:
+
+Sales Service
+    |
+    | HTTP request
+    v
+Inventory Service
+
+These relationships must not be confused with network communication.
+
+Inheritance arrows indicate code-level relationships, while HTTP arrows indicate runtime communication.
+
+### C. Core package dependency rules
+
+Implement dependency direction validation.
+
+Examples:
+- Domain packages should not depend on UI frameworks.
+- Domain packages should not depend on concrete infrastructure implementations.
+- Contract packages should remain lightweight.
+- A shared core package should not depend on an application that consumes it.
+- Circular package dependencies must be reported.
+- Incompatible package versions must be reported.
+
+Let users configure their own architecture rules.
+
+Generate package dependency graphs separately from runtime communication graphs.
+
+### D. Implementation outputs
+
+Generate:
+- Package inventory.
+- Dependency graph.
+- Suggested package folder structure.
+- Package references.
+- Version constraints.
+- Build order.
+- Implementation prompts.
+- Package-level tests.
+
+Support .NET, TypeScript, Python, Java, and other configurable technology ecosystems without hardcoding a single language.
+
+For .NET, optionally generate example project names, project references, and NuGet package metadata.
+
+## 10. Component connections and ports
+
+Build a connection compatibility system.
+
+Every port has:
+- Port ID.
+- Name.
+- Direction.
+- Interface type.
+- Supported protocols.
+- Request schema.
+- Response schema.
+- Required or optional status.
+- Authentication requirements.
+
+Examples:
+- REST endpoint port.
+- HTTP client port.
+- Database query port.
+- Event publisher port.
+- Event subscriber port.
+- Package dependency port.
+- Network ingress port.
+- Network egress port.
+
+Prevent obviously invalid connections.
+
+For example:
+- A package inheritance connection should not be treated as an HTTP request.
+- A database should not expose an ordinary HTTP endpoint unless a database API or proxy component is explicitly modeled.
+- An event publisher and subscriber should use a compatible event contract.
+- An HTTP client should connect to a compatible HTTP endpoint or explicitly configured gateway.
+- A response port should connect to a compatible request/response interaction.
+
+Allow advanced users to override compatibility warnings with a recorded explanation.
+
+## 11. Communication protocol designer
+
+Provide a protocol selector for each runtime connection.
+
+Support:
+- HTTP.
+- HTTPS.
+- REST.
+- WebSocket.
+- Server-Sent Events.
+- gRPC.
+- JSON-RPC.
+- Message queues.
+- Publish/subscribe.
+- Webhooks.
+- TCP.
+- UDP.
+- Database protocols.
+- File transfer.
+- Bluetooth or device-local communication.
+- Custom protocol.
+
+Distinguish application-level protocols from transport mechanisms.
+
+For every connection, show a short plain-English explanation.
+
+Examples:
+- HTTPS: request/response communication over an encrypted connection.
+- WebSocket: a persistent, bidirectional connection.
+- Server-Sent Events: server-to-client streaming.
+- Queue: asynchronous message delivery.
+- gRPC: contract-driven remote procedure calls.
+- Database protocol: direct database access, which requires appropriate network and credential controls.
+
+Recommend protocols based on communication requirements, not popularity alone.
+
+## 12. Business requirements and architecture generation
+
+Create a business brief wizard.
+
+Collect:
+- Business name.
+- Business goals.
+- Target users.
+- Core workflows.
+- Required applications.
+- Required integrations.
+- Expected scale.
+- Preferred technologies.
+- Hosting preferences.
+- Budget.
+- Offline requirements.
+- Security requirements.
+- Availability expectations.
+- AI and automation requirements.
+
+Allow the user to say "I don't know" for any technical decision.
+
+Use the current architecture to recommend a reasonable initial design.
+
+The deterministic architect engine should:
+- Identify required components.
+- Suggest service boundaries.
+- Propose networks.
+- Recommend protocols.
+- Suggest data stores.
+- Identify external dependencies.
+- Recommend core packages.
+- Explain architectural trade-offs.
+- Suggest implementation phases.
+
+Do not generate an unnecessary microservice architecture for a small business.
+
+Prefer a modular monolith when it meets the requirements. Split services when there is a justified reason such as independent scaling, deployment, security boundaries, or offline operation.
+
+Ask clarifying questions when critical requirements are unknown.
+
+Do not pretend a deterministic recommendation engine is a live language model.
+
+## 13. Architecture inspector and validation
+
+Create a validation engine that examines the actual architecture graph.
+
+Validate:
+- Missing endpoints.
+- Broken connectors.
+- Missing request or response contracts.
+- Missing authentication.
+- Missing authorization.
+- Missing database dependencies.
+- Incorrect package dependency direction.
+- Circular dependencies.
+- Invalid inheritance relationships.
+- Incompatible protocols.
+- Unauthorized network crossings.
+- Public access to private resources.
+- Missing gateway or approved path.
+- Missing retry or timeout policies.
+- Missing event consumers.
+- Missing offline synchronization.
+- Missing backup and recovery strategy.
+- Missing monitoring.
+- Missing deployment target.
+- Duplicate component ownership.
+- Unresolved dependencies.
+- Inconsistent API contracts.
+- Incomplete implementation tasks.
+
+Findings must have:
+- Severity.
+- Description.
+- Affected node or connection IDs.
+- Reason.
+- Recommended fix.
+- Action to focus the affected item on the canvas.
+
+Use Error, Warning, and Suggestion levels.
+
+Recalculate validation when relevant architecture data changes.
+
+Do not claim that passing static checks guarantees security or production readiness.
+
+## 14. Dependency-aware implementation roadmap
+
+Generate a build plan from the architecture graph.
+
+Do not use a fixed sequence for every business.
+
+Analyze:
+- Package dependencies.
+- Database prerequisites.
+- API contracts.
+- Service dependencies.
+- Network requirements.
+- Frontend requirements.
+- Integration prerequisites.
+- Testing dependencies.
+- Deployment requirements.
+
+Create ordered tasks such as:
+1. Repository and project setup.
+2. Shared contracts and core packages.
+3. Database schema and migrations.
+4. Authentication and authorization.
+5. Backend services.
+6. API endpoints.
+7. Integration adapters.
+8. Frontend applications.
+9. Mobile applications.
+10. AI and automation.
+11. Testing and security review.
+12. Deployment and monitoring.
+
+Reorder the sequence according to the actual graph.
+
+Each task needs:
+- ID.
+- Title.
+- Objective.
+- Scope.
+- Dependencies.
+- Related nodes.
+- Expected files.
+- Contracts.
+- Acceptance criteria.
+- Tests.
+- Status.
+- Generated prompt.
+
+Prevent a task from being considered ready when required tasks are incomplete.
+
+Show the dependency graph and explain why each task belongs in its position.
+
+## 15. Vibe-coding Prompt Studio
+
+Generate prompts for:
+- Claude Code.
+- OpenAI Codex.
+- Cursor.
+- Generic coding agents.
+
+Provide a master context prompt and task-specific prompts.
+
+Every prompt should include:
+- Business context.
+- Architecture overview.
+- Relevant nodes and their stable IDs.
+- Exact technology decisions.
+- Package dependencies.
+- API and event contracts.
+- Database responsibilities.
+- Network assumptions.
+- Security requirements.
+- Error handling.
+- Tests.
+- Acceptance criteria.
+- Out-of-scope requirements.
+- Required output and reporting format.
+
+Generate prompts in dependency order.
+
+The agent should be instructed to:
+- Inspect the repository before changing code.
+- Preserve existing working functionality.
+- Implement only the assigned task.
+- Follow the approved architecture.
+- Respect shared package boundaries.
+- Avoid introducing unnecessary frameworks or services.
+- Add tests.
+- Report modified files and test results.
+- Report blockers and architectural conflicts.
+- Avoid claiming success without verification.
+
+When architecture changes, mark affected prompts as potentially outdated.
+
+Include:
+- Copy prompt.
+- Download prompt.
+- Copy all.
+- Export ordered Markdown.
+- Mark complete.
+- Mark failed.
+- Add implementation notes.
+- Regenerate prompt.
+
+The user manually runs prompts. Do not imply that copying or exporting executes them.
+
+## 16. JSON specification and import/export
+
+Define a versioned architecture JSON schema.
+
+The exported JSON must preserve:
+- Project information.
+- Business brief.
+- Nodes.
+- Ports.
+- Connections.
+- Request/response interactions.
+- Network boundaries.
+- Network policies.
+- Package dependencies.
+- Inheritance relationships.
+- Data model.
+- API contracts.
+- Technology decisions.
+- Validation results.
+- Implementation roadmap.
+- Prompt queue.
+- Canvas layout.
+- Custom component definitions.
+
+Use explicit stable IDs and typed relationships.
+
+Example conceptual structure:
+
+{
+  "schemaVersion": 1,
+  "project": {},
+  "businessBrief": {},
+  "architecture": {
+    "nodes": [],
+    "ports": [],
+    "connections": [],
+    "groups": [],
+    "networks": [],
+    "decisions": []
+  },
+  "packages": [],
+  "dataModel": {},
+  "contracts": [],
+  "roadmap": [],
+  "prompts": [],
+  "settings": {}
+}
+
+Extend the schema where necessary.
+
+Validate imported JSON before modifying the current project.
+
+Handle unsupported versions, malformed objects, duplicate IDs, missing references, and invalid relationships gracefully.
+
+Provide:
+- Export full JSON.
+- Import JSON.
+- Export SVG.
+- Export Mermaid.
+- Export Markdown.
+- Export ordered implementation prompts.
+- Export package dependency inventory.
+- Export API contract specification.
+
+Ensure JSON export/import round-trips preserve all essential information.
+
+## 17. Data model and service contracts
+
+Provide editors for:
+- Entities.
+- Attributes.
+- Relationships.
+- REST endpoints.
+- Request schemas.
+- Response schemas.
+- Error contracts.
+- Events.
+- Message payloads.
+- Permissions.
+
+Use these definitions to validate wires and generate prompts.
+
+Generate SQL drafts for supported relational databases and OpenAPI-compatible JSON for supported HTTP APIs.
+
+Clearly label generated specifications as drafts that require review.
+
+## 18. Demo architecture
+
+Create a complete editable demo called:
+
+Smart Operating Pharmacy.
+
+Include:
+- Web administration application.
+- Desktop point-of-sale application.
+- Optional mobile inventory application.
+- Local pharmacy server.
+- Cloud API gateway.
+- Authentication service.
+- Sales service.
+- Inventory service.
+- Drug catalog service.
+- Licensing service.
+- Synchronization service.
+- AI assistant.
+- Automation worker.
+- Relational databases.
+- Message queue.
+- Notification provider.
+- Monitoring.
+- Local network.
+- Public network.
+- Private cloud network.
+
+Show:
+- Request and response paths.
+- Endpoint-level API calls.
+- Database relationships.
+- Package dependencies.
+- Network boundaries.
+- Cross-network security rules.
+- Offline synchronization flows.
+
+Make the diagram readable with sensible initial positions and organized routing.
+
+Do not connect every node to every other node.
+
+The demo must illustrate the difference between:
+- Runtime communication.
+- Code dependencies.
+- Inheritance.
+- Network membership.
+- Data ownership.
+
+Users must be able to modify or delete all demo components.
+
+## 19. Input and interaction design
+
+Support mouse, keyboard, and touch.
+
+Mouse:
+- Click to select.
+- Drag to move.
+- Drag from ports to create connections.
+- Right-click for contextual actions.
+- Scroll to zoom.
+
+Keyboard:
+- Tab navigation.
+- Arrow keys to move selected nodes when appropriate.
+- Delete or Backspace to remove selected items.
+- Ctrl/Cmd+C and Ctrl/Cmd+V for copy/paste.
+- Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z for undo/redo.
+- Escape to cancel an operation.
+- Enter to confirm relevant actions.
+- Accessible shortcuts for common commands.
+
+Touch:
+- Single tap to select.
+- Drag nodes with one finger.
+- Two-finger pan and pinch-to-zoom.
+- Touch-friendly connection creation.
+- Long-press contextual menu.
+- Easy access to component configuration.
+
+Do not rely on hover to reveal essential mobile controls.
+
+Use Pointer Events where practical.
+
+Prevent canvas interactions from accidentally triggering when the user is editing text in a drawer.
+
+When a drawer opens, maintain the diagram state and restore focus appropriately when it closes.
+
+## 20. State management and history
+
+Implement a centralized project state.
+
+Separate:
+- Architecture data.
+- Visual layout.
+- Editor interaction state.
+- Project metadata.
+- Generated artifacts.
+
+Implement a command-based undo/redo history for meaningful changes, including:
+- Adding and deleting nodes.
+- Moving nodes.
+- Creating and deleting connections.
+- Changing node properties.
+- Changing connection properties.
+- Changing group membership.
+- Changing network policies.
+
+Avoid storing every mouse-movement event as a separate history entry.
+
+Commit a move after the drag completes.
+
+Automatically save project data locally and display the save state.
+
+Support multiple projects, duplicate, rename, delete, and recovery from malformed saved state.
+
+Never store real secrets in project storage.
+
+## 21. Responsive layout
+
+Desktop:
+- Component drawer on the left.
+- Large canvas in the center.
+- Inspector drawer on the right.
+- Floating canvas controls.
+
+Tablet:
+- Collapsible component drawer.
+- Resizable canvas.
+- Overlay inspector.
+
+Mobile:
+- Canvas as the main full-screen view.
+- Bottom toolbar.
+- Slide-up component drawer.
+- Full-screen or bottom-sheet inspector.
+- Touch-friendly controls.
+- Compact top toolbar.
+- No horizontal overflow.
+
+Prioritize a usable mobile architecture editor rather than merely shrinking the desktop layout.
+
+## 22. Code organization inside one HTML file
+
+Even though the deliverable is one file, keep the JavaScript maintainable.
+
+Use separate classes or modules inside the script:
+- AppState.
+- ProjectRepository.
+- CommandHistory.
+- ComponentRegistry.
+- CanvasController.
+- NodeRenderer.
+- ConnectorRouter.
+- ConnectionController.
+- NetworkManager.
+- PackageDependencyManager.
+- EndpointManager.
+- ArchitectureValidator.
+- RecommendationEngine.
+- RoadmapGenerator.
+- PromptGenerator.
+- ExportManager.
+- DrawerController.
+- UIController.
+
+Keep domain relationships separate from SVG elements.
+
+Never use SVG DOM positions as the authoritative architecture data.
+
+Use delegated events where appropriate.
+
+Do not evaluate imported strings as executable JavaScript.
+
+Sanitize or safely render user-provided text.
+
+## 23. Performance and quality
+
+The application must:
+- Handle at least 100 nodes and 200 connections in a reasonable browser environment.
+- Keep dragging and panning responsive.
+- Avoid full redraws on every pointer movement.
+- Recalculate only affected connector routes where practical.
+- Preserve connector attachment during zoom and pan.
+- Avoid accidental selection of wires when selecting nodes.
+- Keep the inspector synchronized with the selected object.
+- Prevent invalid graph references.
+- Validate imports.
+- Display actionable errors.
+- Use accessible controls and keyboard focus.
+- Work without an API key.
+- Avoid dead buttons and fake loading states.
+
+## 24. Acceptance tests
+
+Verify these workflows before delivering the application.
+
+Test 1:
+Create a frontend, backend service, and endpoint. Connect the frontend to the endpoint. Verify the wire starts and ends at the correct ports.
+
+Test 2:
+Define an HTTP request and response. Verify both directions are represented correctly and share a logical interaction ID.
+
+Test 3:
+Move the frontend and backend nodes. Verify the orthogonal wire reroutes and remains connected.
+
+Test 4:
+Add multiple wires between the same nodes. Verify that parallel wires remain readable.
+
+Test 5:
+Create public and private network groups. Connect components across the boundaries. Verify that cross-network rules are validated.
+
+Test 6:
+Create a core package and a specialized service. Model the package dependency and inheritance relationships separately from runtime communication.
+
+Test 7:
+Create two packages with a circular dependency. Verify that the validator reports the cycle.
+
+Test 8:
+Create a service with several endpoints. Verify that each endpoint has its own operation contract without becoming a separate deployed service.
+
+Test 9:
+Generate the implementation roadmap. Verify that package and service prerequisites determine task ordering.
+
+Test 10:
+Generate prompts. Verify that each prompt includes the correct technologies, interfaces, dependencies, and acceptance criteria.
+
+Test 11:
+Export the architecture as JSON, reload it, and verify that node IDs, port IDs, connections, network membership, package relationships, and visual positions are preserved.
+
+Test 12:
+Use the application with a mouse, keyboard, and touch-sized viewport.
+
+Test 13:
+Verify that no essential control is decorative or nonfunctional.
+
+Test 14:
+Verify that the application works by opening index.html directly.
+
+## Final delivery instruction
+
+Build the entire working application now.
+
+Prioritize this order:
+
+1. A reliable canvas and interaction model.
+2. Correct, editable, orthogonally routed wires.
+3. Endpoint-level requests and responses.
+4. Networks and boundaries.
+5. Core packages, inheritance, and dependency graphs.
+6. Architecture validation.
+7. Business requirements and recommendations.
+8. Dependency-aware roadmap.
+9. Prompt generation.
+10. Complete JSON export/import.
+11. Mobile interaction.
+12. Visual polish.
+
+Do not sacrifice correct graph relationships and wire routing for decorative effects.
+
+Deliver one complete index.html file with all essential functionality implemented. After implementation, provide concise instructions for opening and using it, and report any limitations honestly.
