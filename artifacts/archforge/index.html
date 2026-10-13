@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111318">
 <title>ArchForge — Architecture Workbench</title>
 <style>
@@ -12,6 +12,87 @@ body.light{color-scheme:light;--bg:#e9ebf0;--panel:#f5f6f8;--panel2:#eceef3;--ca
 body.light .topbar,body.light .project-tab,body.light .status-bar{background:#f1f2f5}body.light .input,body.light .search,body.light .select,body.light .textarea{background:#fff;color:#252a34;border-color:#d0d5df}body.light .canvas-area{background-color:#e9ecf1;background-image:radial-gradient(circle,#c7ccd6 .75px,transparent .85px)}body.light .node-box{fill:#fcfcfd;stroke:#c8ced8;filter:drop-shadow(0 4px 6px #30384a17)}body.light .node-name{fill:#282d38}body.light .node-meta{fill:#687180}body.light .node-kind{fill:#778091}body.light .node.selected .node-box{stroke:#8269d2}body.light .edge-label-bg{fill:#fafbfc;stroke:#cbd0da}body.light .edge-label{fill:#4d5665}body.light .floating-controls,body.light .canvas-badge,body.light .mini-map{background:#f9fafceF;border-color:#ccd1db}body.light .float-btn{color:#596170}body.light .group-shape{fill:#8f78df08}body.light .group-title{fill:#7056c3}
 @media(max-width:1050px){.workspace{grid-template-columns:205px minmax(220px,1fr) 255px}.workspace.left-hidden{grid-template-columns:0 minmax(220px,1fr) 255px}.workspace.right-hidden{grid-template-columns:205px minmax(220px,1fr) 0}.workspace.left-hidden.right-hidden{grid-template-columns:0 minmax(220px,1fr) 0}.brand{min-width:150px}.topbar{gap:8px;padding:0 9px}.action-btn .btn-label{display:none}.action-btn{width:31px;padding:0;justify-content:center}.action-btn svg{width:14px}}
 @media(max-width:720px){html,body{font-size:13px}.app{grid-template-rows:48px 36px minmax(0,1fr) 27px}.topbar{gap:7px;padding:0 8px}.brand{min-width:0}.brand strong{font-size:12px}.brand span,.project-name,.save-state,.top-actions .action-btn:not(.primary){display:none}.top-actions{gap:3px}.action-btn{height:30px;width:auto;padding:0 9px}.action-btn.primary{width:auto}.project-tab{padding:0 8px;gap:8px}.canvas-tools{gap:1px}.canvas-tools .tool-btn{min-width:27px;padding:0 5px}.canvas-tools .tool-label,.keyhint{display:none}.workspace,.workspace.left-hidden,.workspace.right-hidden,.workspace.left-hidden.right-hidden{display:block}.canvas-area{position:absolute;inset:0}.left-panel,.right-panel{position:absolute;z-index:8;top:0;bottom:0;width:min(86vw,320px);box-shadow:var(--shadow);transition:transform .22s,visibility .22s}.left-panel{left:0;transform:translateX(0)}.workspace.left-hidden .left-panel{visibility:hidden;transform:translateX(-105%)}.right-panel{right:0;width:min(90vw,330px);transform:translateX(0)}.workspace.right-hidden .right-panel{visibility:hidden;transform:translateX(105%)}.workspace:not(.left-hidden):after,.workspace:not(.right-hidden):after{content:"";position:absolute;inset:0;z-index:7;background:#06080a77}.workspace:not(.left-hidden) .left-panel{z-index:9}.workspace:not(.right-hidden) .right-panel{z-index:9}.workspace:not(.left-hidden):not(.right-hidden) .right-panel{z-index:10}.mini-map{display:none}.canvas-hint{bottom:60px}.floating-controls{bottom:9px}.status-bar{padding:0 8px;gap:9px}.status-bar .status-item:nth-child(2),.status-right{display:none}.mobile-toggle{display:inline-flex}.canvas-badge{top:8px;left:9px}.modal-backdrop{padding:9px}.modal{max-height:91vh}.finding{grid-template-columns:57px 1fr auto}}
+@media(max-width:720px){
+  .app{grid-template-rows:48px minmax(0,1fr) 54px calc(26px + env(safe-area-inset-bottom))}
+  .topbar{grid-row:1;min-width:0;gap:4px;padding:0 7px}
+  .topbar .brand{flex:0 0 auto}
+  .top-actions{flex:0 0 auto;gap:1px}
+  .top-actions .icon-btn{width:38px;height:42px;min-width:38px}
+  .top-actions .tab-divider{display:none}
+  .workspace{grid-row:2;min-height:0}
+  .project-tab{grid-row:3;height:54px;min-width:0;padding:0 5px;gap:2px;border-top:1px solid var(--line);border-bottom:0;justify-content:space-between;overflow:hidden}
+  .project-tab .tab-title,.project-tab>.tab-divider,.project-tab .keyhint{display:none}
+  .canvas-tools{flex:1;min-width:0;justify-content:space-around;gap:0}
+  .canvas-tools .tool-btn,.project-tab>.tool-btn{width:44px;height:46px;min-width:44px;flex:0 0 44px;border-radius:10px;justify-content:center}
+  .canvas-tools .tool-btn svg,.project-tab>.tool-btn svg{width:19px;height:19px}
+  #duplicateBtn,#deleteBtn{display:none}
+  #plusNode .tool-label,#searchToggle .tool-label{display:none}
+  .status-bar{grid-row:4;min-height:26px;padding-bottom:env(safe-area-inset-bottom)}
+  .left-panel,.right-panel{top:auto;bottom:0;left:0;right:0;width:100%;height:min(76dvh,calc(100% - 12px));max-height:calc(100% - 12px);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;background:var(--panel);box-shadow:0 -14px 40px #0007;transform:translateY(0);overflow:hidden}
+  .left-panel{right:0}
+  .right-panel{width:100%;left:0;right:0}
+  .workspace.left-hidden .left-panel{visibility:hidden;transform:translateY(105%)}
+  .workspace.right-hidden .right-panel{visibility:hidden;transform:translateY(105%)}
+  .panel-head{position:relative;height:52px;padding:0 18px;flex:0 0 52px}
+  .panel-head:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:36px;height:4px;border-radius:4px;background:#697182}
+  .panel-head .head-tools .icon-btn{width:40px;height:40px}
+  .panel-scroll{padding:14px 16px calc(20px + env(safe-area-inset-bottom))}
+  .lib-item{height:44px;font-size:12px}
+  .category-head{height:34px;font-size:10px}
+  .search{height:42px;font-size:13px}
+  .custom-add{height:42px;font-size:12px}
+  .workspace:not(.left-hidden):after,.workspace:not(.right-hidden):after{z-index:7}
+  .workspace:not(.left-hidden) .left-panel,.workspace:not(.right-hidden) .right-panel{z-index:9}
+  .workspace:not(.left-hidden):not(.right-hidden) .right-panel{z-index:10}
+  .canvas-hint{display:none}
+  .mobile-canvas-hint{display:block;position:absolute;z-index:2;left:50%;bottom:57px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);padding:6px 10px;border:1px solid #333946;border-radius:20px;background:#171a20e8;color:#aab2c0;font-size:10px;text-align:center;pointer-events:none}
+  .floating-controls{bottom:9px;min-height:42px}
+  .float-btn{width:40px;height:40px;min-width:40px}
+  .canvas-badge{top:8px;left:9px}
+  .modal-backdrop{padding:8px}
+  .modal{width:100%;max-height:calc(100dvh - 16px);border-radius:14px}
+}
+@media(max-width:390px){
+  .topbar .brand strong{font-size:11px}
+  .top-actions .icon-btn{width:35px;height:40px;min-width:35px}
+  .project-tab{padding:0 3px}
+  .canvas-tools .tool-btn,.project-tab>.tool-btn{width:41px;min-width:41px;flex-basis:41px}
+}
+@media(min-width:721px) and (min-height:521px), (min-width:1001px){.mobile-canvas-hint{display:none}}
+@media (min-width:721px) and (max-width:1000px) and (max-height:520px){
+  .app{grid-template-rows:44px minmax(0,1fr) 52px calc(24px + env(safe-area-inset-bottom))}
+  .topbar{grid-row:1;min-width:0;gap:4px;padding:0 7px}
+  .topbar .brand{flex:0 0 auto;min-width:0}
+  .topbar .brand strong{font-size:12px}
+  .topbar .brand span,.project-name,.save-state,.top-actions .action-btn:not(.primary){display:none}
+  .top-actions{flex:0 0 auto;gap:1px}
+  .top-actions .icon-btn{width:38px;height:40px;min-width:38px;flex:0 0 38px}
+  .top-actions .tab-divider{display:none}
+  .workspace{grid-row:2;display:block;min-height:0}
+  .project-tab{grid-row:3;height:52px;min-width:0;padding:0 5px;gap:2px;border-top:1px solid var(--line);border-bottom:0;justify-content:space-between;overflow:hidden}
+  .project-tab .tab-title,.project-tab>.tab-divider,.project-tab .keyhint{display:none}
+  .canvas-tools{flex:1;min-width:0;justify-content:space-around;gap:0}
+  .canvas-tools .tool-btn,.project-tab>.tool-btn{width:44px;height:46px;min-width:44px;flex:0 0 44px;border-radius:10px;justify-content:center}
+  .canvas-tools .tool-btn svg,.project-tab>.tool-btn svg{width:19px;height:19px}
+  #duplicateBtn,#deleteBtn{display:none}
+  #plusNode .tool-label,#searchToggle .tool-label{display:none}
+  .status-bar{grid-row:4;min-height:24px;padding:0 8px;gap:8px;padding-bottom:env(safe-area-inset-bottom)}
+  .status-bar .status-item:nth-child(2),.status-right{display:none}
+  .mobile-toggle{display:inline-flex}
+  .canvas-area{position:absolute;inset:0}
+  .left-panel,.right-panel{position:absolute;z-index:8;top:auto;bottom:0;left:0;right:0;width:100%;height:min(76dvh,calc(100% - 8px));max-height:calc(100% - 8px);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;background:var(--panel);box-shadow:0 -14px 40px #0007;transition:transform .22s,visibility .22s;overflow:hidden}
+  .workspace.left-hidden .left-panel,.workspace.right-hidden .right-panel{visibility:hidden;transform:translateY(105%)}
+  .panel-head{position:relative;height:48px;flex:0 0 48px;padding:0 16px}
+  .panel-head:before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:4px;border-radius:4px;background:#697182}
+  .panel-scroll{padding:10px 14px calc(16px + env(safe-area-inset-bottom))}
+  .mini-map{display:none}
+  .canvas-hint{display:none}
+  .mobile-canvas-hint{display:block;position:absolute;z-index:2;left:50%;bottom:57px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);padding:5px 10px;border:1px solid #333946;border-radius:20px;background:#171a20e8;color:#aab2c0;font-size:10px;text-align:center;pointer-events:none}
+  .floating-controls{bottom:6px;min-height:40px}
+  .float-btn{width:38px;height:38px;min-width:38px}
+  .workspace:not(.left-hidden):after,.workspace:not(.right-hidden):after{content:"";position:absolute;inset:0;z-index:7;background:#06080a77}
+  .workspace:not(.left-hidden) .left-panel,.workspace:not(.right-hidden) .right-panel{z-index:9}
+}
 </style>
 </head>
 <body>
@@ -65,7 +146,8 @@ body.light .topbar,body.light .project-tab,body.light .status-bar{background:#f1
   <section class="canvas-area" id="canvasArea" aria-label="Architecture canvas">
    <div class="canvas-badge"><b id="nodeCount">0 components</b> &nbsp;·&nbsp; <span id="edgeCount">0 relationships</span></div>
    <svg id="canvasSvg" role="img" aria-label="Editable system architecture diagram"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0 0 8 4 0 8z" fill="context-stroke"/></marker><marker id="arrowStart" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M8 0 0 4 8 8z" fill="context-stroke"/></marker></defs><g id="viewport"><g id="groupsLayer"></g><g id="edgesLayer"></g><g id="nodesLayer"></g></g></svg>
-   <div class="canvas-hint">Drag to move · drag empty space to pan · scroll to zoom</div>
+    <div class="canvas-hint">Drag to move · use the Pan tool or scroll to navigate</div>
+    <div class="mobile-canvas-hint">Tap a component for details · drag blank canvas to pan · pinch to zoom</div>
    <div class="floating-controls">
     <button class="float-btn" id="zoomOut" title="Zoom out" aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     <span class="zoom-level" id="zoomLabel">100%</span>
@@ -245,7 +327,12 @@ function bind(){ $('#undoBtn').onclick=undo;$('#redoBtn').onclick=redo;$('#fitBt
 function zoomAt(factor,cx,cy){let r=$('#canvasArea').getBoundingClientRect();cx=cx??r.left+r.width/2;cy=cy??r.top+r.height/2;let lx=cx-r.left,ly=cy-r.top,wx=(lx-view.x)/view.z,wy=(ly-view.y)/view.z;view.z=Math.max(.2,Math.min(2.4,view.z*factor));view.x=lx-wx*view.z;view.y=ly-wy*view.z;updateTransform()}
 function handleCanvasWheel(e){if(!e.target.closest('#canvasSvg'))return;e.preventDefault();e.stopImmediatePropagation();const rect=$('#canvasArea').getBoundingClientRect();let dx=e.deltaX,dy=e.deltaY;if(e.deltaMode===1){dx*=16;dy*=16}else if(e.deltaMode===2){dx*=rect.width;dy*=rect.height}if(e.ctrlKey||e.metaKey){zoomAt(Math.exp(-dy*.002),e.clientX,e.clientY)}else if(e.shiftKey){view.x-=dx||dy;updateTransform()}else{view.x-=dx;view.y-=dy;updateTransform()}}
 document.addEventListener('wheel',handleCanvasWheel,{capture:true,passive:false});
-state.settings=state.settings||{};if(state.settings?.theme==='light')document.body.classList.add('light');if(innerWidth<=720)$('#workspace').classList.add('left-hidden','right-hidden');$('#projectMenu').innerHTML=escapeHtml(state.project?.name||'Smart Operating Pharmacy')+' <span style="color:#727b8b">⌄</span>';libraryRender();bind();renderAll();setTimeout(fit,80);
+function isCompactViewport(){return innerWidth<=720||(innerWidth<=1000&&innerHeight<=520)}
+function mobileStartupView(){if(!isCompactViewport())return fit();let focus=state.nodes.filter(n=>['gateway','endpoint-sales','auth','sales','inventory'].includes(n.id));if(!focus.length)return fit();let minX=Math.min(...focus.map(n=>n.x)),minY=Math.min(...focus.map(n=>n.y)),maxX=Math.max(...focus.map(n=>n.x+n.w)),maxY=Math.max(...focus.map(n=>n.y+n.h)),r=$('#canvasArea').getBoundingClientRect(),w=maxX-minX,h=maxY-minY;view.z=Math.max(innerHeight<=520?.42:.72,Math.min(1.05,(r.width-48)/w,(r.height-(innerHeight<=520?56:112))/h));view.x=(r.width-w*view.z)/2-minX*view.z;view.y=(r.height-h*view.z)/2-minY*view.z;updateTransform()}
+function installMobilePanelControls(){const workspace=$('#workspace'),baseRenderInspector=renderInspector;renderInspector=function(){baseRenderInspector();if(innerWidth<=720&&selected){workspace.classList.add('left-hidden');workspace.classList.remove('right-hidden')}};[['leftToggle','left'],['collapseLeft','left'],['plusNode','left'],['rightToggle','right'],['collapseRight','right']].forEach(([id,side])=>$('#'+id)?.addEventListener('click',e=>{if(innerWidth>720)return;e.preventDefault();e.stopImmediatePropagation();if(id==='plusNode'){workspace.classList.add('right-hidden');workspace.classList.remove('left-hidden');return}let hidden=side+'-hidden',wasOpen=!workspace.classList.contains(hidden);workspace.classList.add('left-hidden','right-hidden');if(!wasOpen)workspace.classList.remove(hidden)},true))}
+function installMobileInteractions(){const svg=$('#canvasSvg'),workspace=$('#workspace'),touches=new Map;let pinch=null,lastNarrow=innerWidth<=480;const getCenter=pts=>({x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2}),getDistance=pts=>Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y);function setPanel(side){let hidden=side+'-hidden',wasOpen=!workspace.classList.contains(hidden);workspace.classList.add('left-hidden','right-hidden');if(!wasOpen)workspace.classList.remove(hidden);if(side==='right'&&selected)renderInspector()}[['leftToggle','left'],['collapseLeft','left'],['plusNode','left'],['rightToggle','right'],['collapseRight','right']].forEach(([id,side])=>$('#'+id)?.addEventListener('click',e=>{if(innerWidth>720)return;e.preventDefault();e.stopImmediatePropagation();setPanel(side)},true));workspace.addEventListener('click',e=>{if(innerWidth<=720&&e.target===workspace)workspace.classList.add('left-hidden','right-hidden')},true);document.addEventListener('keydown',e=>{if(innerWidth<=720&&e.key==='Escape'&&(!workspace.classList.contains('left-hidden')||!workspace.classList.contains('right-hidden'))){e.preventDefault();e.stopImmediatePropagation();workspace.classList.add('left-hidden','right-hidden')}},true);svg.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')return;touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touches.size>=2){let pts=[...touches.values()].slice(0,2);pinch={distance:getDistance(pts),center:getCenter(pts)};drag=null;e.preventDefault();e.stopImmediatePropagation();try{svg.setPointerCapture(e.pointerId)}catch{}return}if(e.target.closest('.node,.edge-group,[data-group]'))return;e.preventDefault();drag={kind:'pan',px:e.clientX,py:e.clientY,ox:view.x,oy:view.y};try{svg.setPointerCapture(e.pointerId)}catch{}},true);svg.addEventListener('pointermove',e=>{if(e.pointerType!=='touch'||!touches.has(e.pointerId))return;touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(!pinch||touches.size<2)return;let pts=[...touches.values()].slice(0,2),center=getCenter(pts),distance=getDistance(pts);view.x+=center.x-pinch.center.x;view.y+=center.y-pinch.center.y;zoomAt(distance/Math.max(pinch.distance,1),center.x,center.y);pinch={distance,center};e.preventDefault();e.stopImmediatePropagation()},true);function endTouch(e){if(e.pointerType!=='touch'||!touches.has(e.pointerId))return;let wasPinching=Boolean(pinch);touches.delete(e.pointerId);if(wasPinching){e.preventDefault();e.stopImmediatePropagation();if(touches.size>=2){let pts=[...touches.values()].slice(0,2);pinch={distance:getDistance(pts),center:getCenter(pts)}}else if(touches.size===1){let p=[...touches.values()][0];pinch=null;drag={kind:'pan',px:p.x,py:p.y,ox:view.x,oy:view.y};try{svg.setPointerCapture([...touches.keys()][0])}catch{}}else{pinch=null;drag=null}return}if(!touches.size&&drag?.kind==='pan')drag=null}svg.addEventListener('pointerup',endTouch,true);svg.addEventListener('pointercancel',endTouch,true);let closeOnCanvasDown=e=>{if(innerWidth<=720&&e.target.closest('#canvasSvg')&&(!workspace.classList.contains('left-hidden')||!workspace.classList.contains('right-hidden'))){workspace.classList.add('left-hidden','right-hidden')}};svg.addEventListener('pointerdown',closeOnCanvasDown);window.addEventListener('resize',()=>{let narrow=innerWidth<=480;if(narrow!==lastNarrow){lastNarrow=narrow;setTimeout(mobileStartupView,80)}})}
+function installCompactViewportEnhancements(){const workspace=$('#workspace'),originalInspector=renderInspector;renderInspector=function(){originalInspector();if(isCompactViewport()&&selected){workspace.classList.add('left-hidden');workspace.classList.remove('right-hidden')}};[['leftToggle','left'],['collapseLeft','left'],['plusNode','left'],['rightToggle','right'],['collapseRight','right']].forEach(([id,side])=>$('#'+id)?.addEventListener('click',e=>{if(!isCompactViewport())return;e.preventDefault();e.stopImmediatePropagation();if(id==='plusNode'){workspace.classList.add('right-hidden');workspace.classList.remove('left-hidden');return}let hidden=side+'-hidden',wasOpen=!workspace.classList.contains(hidden);workspace.classList.add('left-hidden','right-hidden');if(!wasOpen)workspace.classList.remove(hidden)},true));workspace.addEventListener('click',e=>{if(isCompactViewport()&&e.target===workspace)workspace.classList.add('left-hidden','right-hidden')},true);document.addEventListener('keydown',e=>{if(isCompactViewport()&&e.key==='Escape'&&(!workspace.classList.contains('left-hidden')||!workspace.classList.contains('right-hidden'))){e.preventDefault();e.stopImmediatePropagation();workspace.classList.add('left-hidden','right-hidden')}},true);let wasCompact=isCompactViewport();if(wasCompact)workspace.classList.add('left-hidden','right-hidden');window.addEventListener('resize',()=>{let compact=isCompactViewport();if(compact!==wasCompact){wasCompact=compact;if(compact)workspace.classList.add('left-hidden','right-hidden');else workspace.classList.remove('left-hidden','right-hidden');setTimeout(mobileStartupView,80)}})}
+state.settings=state.settings||{};if(state.settings?.theme==='light')document.body.classList.add('light');if(innerWidth<=720)$('#workspace').classList.add('left-hidden','right-hidden');$('#projectMenu').innerHTML=escapeHtml(state.project?.name||'Smart Operating Pharmacy')+' <span style="color:#727b8b">⌄</span>';libraryRender();installMobilePanelControls();installMobileInteractions();installCompactViewportEnhancements();bind();renderAll();setTimeout(mobileStartupView,80);
 })();
 </script>
 </body>
